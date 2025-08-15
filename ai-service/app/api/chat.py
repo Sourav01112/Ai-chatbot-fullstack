@@ -41,69 +41,69 @@ class ConversationHistory(BaseModel):
 # laterr will be replaced with a proper database, with redis cachingg
 conversations_store = {}
 
-@router.post("/send", response_model=ChatResponse)
-async def send_message(request: ChatRequest):
-    try:
-        print(f"Received message: {request}")
-        conversation_id = request.conversation_id or str(uuid.uuid4())
+# @router.post("/send", response_model=ChatResponse)
+# async def send_message(request: ChatRequest):
+#     try:
+#         print(f"Received message: {request}")
+#         conversation_id = request.conversation_id or str(uuid.uuid4())
         
-        if conversation_id not in conversations_store:
-            conversations_store[conversation_id] = {
-                "messages": [],
-                "created_at": datetime.now(),
-                "updated_at": datetime.now()
-            }
+#         if conversation_id not in conversations_store:
+#             conversations_store[conversation_id] = {
+#                 "messages": [],
+#                 "created_at": datetime.now(),
+#                 "updated_at": datetime.now()
+#             }
         
-        conversation = conversations_store[conversation_id]
+#         conversation = conversations_store[conversation_id]
         
-        user_message = ChatMessage(role="user", content=request.message)
-        conversation["messages"].append(user_message)
+#         user_message = ChatMessage(role="user", content=request.message)
+#         conversation["messages"].append(user_message)
         
-        context = ""
-        if len(conversation["messages"]) > 1:
-            recent_messages = conversation["messages"][-5:]  # 5 messages for context
-            context = "\n".join([
-                f"{msg.role}: {msg.content}" 
-                for msg in recent_messages[:-1]  
-            ])
+#         context = ""
+#         if len(conversation["messages"]) > 1:
+#             recent_messages = conversation["messages"][-5:]  # 5 messages for context
+#             context = "\n".join([
+#                 f"{msg.role}: {msg.content}" 
+#                 for msg in recent_messages[:-1]  
+#             ])
         
-        ai_result = await ollama_service.generate_response(
-            prompt=request.message,
-            context=context or request.context,
-            model=request.model if request.model else settings.OLLAMA_MODEL
-        )
+#         ai_result = await ollama_service.generate_response(
+#             prompt=request.message,
+#             context=context or request.context,
+#             model=request.model if request.model else settings.OLLAMA_MODEL
+#         )
         
-        if not ai_result["success"]:
-            raise HTTPException(
-                status_code=500,
-                detail=f"AI service error: {ai_result['error']}"
-            )
+#         if not ai_result["success"]:
+#             raise HTTPException(
+#                 status_code=500,
+#                 detail=f"AI service error: {ai_result['error']}"
+#             )
         
-        ai_message = ChatMessage(
-            role="assistant", 
-            content=ai_result["response"]
-        )
-        conversation["messages"].append(ai_message)
-        conversation["updated_at"] = datetime.now()
+#         ai_message = ChatMessage(
+#             role="assistant", 
+#             content=ai_result["response"]
+#         )
+#         conversation["messages"].append(ai_message)
+#         conversation["updated_at"] = datetime.now()
         
-        return ChatResponse(
-            success=True,
-            conversation_id=conversation_id,
-            response=ai_result["response"],
-            model_info={
-                "model": ai_result.get("model"),
-                "total_duration": ai_result.get("total_duration", 0),
-                "eval_count": ai_result.get("eval_count", 0)
-            }
-        )
+#         return ChatResponse(
+#             success=True,
+#             conversation_id=conversation_id,
+#             response=ai_result["response"],
+#             model_info={
+#                 "model": ai_result.get("model"),
+#                 "total_duration": ai_result.get("total_duration", 0),
+#                 "eval_count": ai_result.get("eval_count", 0)
+#             }
+#         )
         
-    except HTTPException:
-        raise
-    except Exception as e:
-        raise HTTPException(
-            status_code=500,
-            detail=f"Unexpected error: {str(e)}"
-        )
+#     except HTTPException:
+#         raise
+#     except Exception as e:
+#         raise HTTPException(
+#             status_code=500,
+#             detail=f"Unexpected error: {str(e)}"
+#         )
 
 @router.get("/conversations/{conversation_id}", response_model=ConversationHistory)
 async def get_conversation(conversation_id: str):

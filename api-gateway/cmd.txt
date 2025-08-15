@@ -1,0 +1,10 @@
+# Health check
+curl http://localhost:3000/health
+
+# Basic endpoint
+curl http://localhost:3000/
+
+# WebSocket (in browser console)
+const ws = new WebSocket('ws://localhost:3000/ws');
+ws.onopen = () => ws.send('{"test": "hello"}');
+ws.onmessage = (e) => console.log(e.data);

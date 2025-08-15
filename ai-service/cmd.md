@@ -25,6 +25,19 @@ ollama serve
 
 ollama serve
 
+
+
+# Set environment variables for better Windows performance
+[Environment]::SetEnvironmentVariable("OLLAMA_NUM_PARALLEL", "1", "Machine")
+[Environment]::SetEnvironmentVariable("OLLAMA_MAX_LOADED_MODELS", "1", "Machine")
+[Environment]::SetEnvironmentVariable("OLLAMA_FLASH_ATTENTION", "1", "Machine")
+[Environment]::SetEnvironmentVariable("OLLAMA_HOST", "127.0.0.1:11434", "Machine")
+
+# Restart Ollama service
+Stop-Process -Name "ollama" -Force -ErrorAction SilentlyContinue
+Start-Sleep -Seconds 3
+& "ollama" serve
+
 # on windows ends ----
 
 # on MAC ----->

@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     REFRESH_TOKEN_EXPIRE_DAYS: int = 7
     
-    OLLAMA_BASE_URL: str = "http://192.168.1.11:11434"
+    OLLAMA_BASE_URL: str = "http://192.168.1.9:11434"
     # OLLAMA_MODEL: str = "llama2:7b"
     OLLAMA_MODEL: str = "llama2:13b"
     
