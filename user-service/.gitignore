@@ -1,0 +1,58 @@
+cmd/
+readme/
+proto/
+scripts/
+internal/grpc/
+internal/repository/
+internal/service/
+
+
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with -html flag
+*.out
+
+# Dependency directories (remove the comment below if using Go modules)
+# vendor/
+
+# Go workspace file
+go.work
+
+# Local environment-specific files
+.env
+*.env
+
+# IDE and editor files
+.idea/
+.vscode/
+*.sublime-*
+
+# Mac OS metadata
+.DS_Store
+
+# Build artifacts
+dist/
+bin/
+build/
+
+# Go module cache
+go.sum
+
+# Temporary files
+*~
+
+
+/bin/
+/vendor/
+/*.exe
+*.log
+
+
