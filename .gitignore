@@ -1,2 +1,6 @@
-chat-service/
-user-service/
+frontend-next/
+*.md
+.vscode/
+readme/
+ai-service/
+api-gateway/

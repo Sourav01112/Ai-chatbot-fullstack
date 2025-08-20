@@ -1,0 +1,17 @@
+root = "."            # project root
+tmp_dir = "tmp"       # temp dir for build output
+
+[build]
+  bin = "tmp/main"    # where the built binary will be placed
+  cmd = "go build -o tmp/main ./cmd/server" # build from cmd/api
+  exclude = ["tmp/*", "client/*"]
+  include = ["**/*.go"]
+  ignore = ["tmp/*"]
+
+[log]
+  time = true
+
+[color]
+  main = "yellow"
+  watcher = "cyan"
+  build = "green"
