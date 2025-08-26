@@ -136,7 +136,7 @@ export default function Subscription() {
                   <Button variant="hero" size="lg" asChild>
                     <a href="https://x.ai/grok" target="_blank" rel="noopener noreferrer">
                       <ExternalLink className="h-4 w-4 mr-2" />
-                      Upgrade to SuperGrok
+                      Upgrade to SuperAI
                     </a>
                   </Button>
                 </div>
@@ -196,7 +196,7 @@ export default function Subscription() {
                   <span>Unlock Premium Features</span>
                 </CardTitle>
                 <CardDescription>
-                  Upgrade to SuperGrok for unlimited access and advanced features
+                  Upgrade to SuperAI for unlimited access and advanced features
                 </CardDescription>
               </CardHeader>
               <CardContent>

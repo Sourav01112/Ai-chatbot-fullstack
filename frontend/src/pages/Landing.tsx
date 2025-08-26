@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { MessageCircle, Zap, Shield, Star, ArrowRight, Sparkles } from 'lucide-react';
 import heroImage from '@/assets/hero-bg.jpg';
+import VisitorNotice from '@/components/layout/VisitorNotice';
 
 export default function Landing() {
   const features = [
@@ -30,6 +31,10 @@ export default function Landing() {
   ];
 
   return (
+    <>
+    
+    <VisitorNotice />
+    
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
@@ -169,10 +174,12 @@ export default function Landing() {
             </nav>
           </div>
           <div className="mt-8 pt-8 border-t border-border text-center text-sm text-muted-foreground">
-            © 2024 AI Chatbot Platform. All rights reserved.
+            © 2025 AI Chatbot Platform. All rights reserved.
           </div>
         </div>
       </footer>
     </div>
+    </>
+
   );
 }
