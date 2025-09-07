@@ -20,14 +20,12 @@ func NewLogger(cfg *config.Config) (*zap.Logger, error) {
 		zapConfig.EncoderConfig.EncodeLevel = zapcore.CapitalColorLevelEncoder
 	}
 
-	// Use the nested Logging structure
 	level, err := zapcore.ParseLevel(cfg.Logging.Level)
 	if err != nil {
 		level = zapcore.InfoLevel
 	}
 	zapConfig.Level = zap.NewAtomicLevelAt(level)
 
-	// Use the nested Logging structure
 	if cfg.Logging.Format == "json" {
 		zapConfig.Encoding = "json"
 	} else {

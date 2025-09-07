@@ -1,4 +1,11 @@
 # Dependencies
+
+readme/
+cmd.txt
+
+
+
+
 node_modules/
 node_modules/
 **/node_modules/

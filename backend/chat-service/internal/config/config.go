@@ -43,7 +43,7 @@ func Load() (*Config, error) {
 
 	config := &Config{
 		GRPCPort: getEnv("GRPC_PORT", "50052"),
-		HTTPPort: getEnv("HTTP_PORT", "8080"),
+		HTTPPort: getEnv("HTTP_PORT", "8002"),
 		Host:     getEnv("HOST", "0.0.0.0"),
 		Env:      getEnv("ENVIRONMENT", "development"),
 
@@ -78,7 +78,7 @@ func buildDatabaseURL() string {
 	port := getEnv("DB_PORT", "5432")
 	user := getEnv("DB_USER", "postgres")
 	password := getEnv("DB_PASSWORD", "")
-	dbName := getEnv("DB_NAME", "chatapp")
+	dbName := getEnv("DB_NAME", "aichatops")
 	sslMode := getEnv("DB_SSL_MODE", "disable")
 
 	return fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=%s",

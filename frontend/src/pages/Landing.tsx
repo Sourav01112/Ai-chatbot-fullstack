@@ -42,7 +42,7 @@ export default function Landing() {
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center space-x-2">
               <MessageCircle className="h-8 w-8 text-primary" />
-              <span className="text-xl font-bold gradient-text">AI Chatbot</span>
+              <span className="text-xl font-bold gradient-text">AIChatOps</span>
             </div>
             <nav className="hidden md:flex items-center space-x-6">
               <Link to="/login" className="text-foreground hover:text-primary transition-colors">
@@ -79,7 +79,7 @@ export default function Landing() {
             </div>
             
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold font-display tracking-tight mb-6">
-              <span className="gradient-text">AI Chatbot:</span>
+              <span className="gradient-text">AIChatOps:</span>
               <br />
               Intelligent Conversations
             </h1>
@@ -111,7 +111,7 @@ export default function Landing() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold font-display mb-4">
-              Why Choose Our AI Chatbot?
+              Why Choose Our AIChatOps?
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Discover the features that make our platform the best choice for intelligent conversations.
@@ -164,7 +164,7 @@ export default function Landing() {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-2 mb-4 md:mb-0">
               <MessageCircle className="h-6 w-6 text-primary" />
-              <span className="text-lg font-bold gradient-text">AI Chatbot</span>
+              <span className="text-lg font-bold gradient-text">AIChatOps</span>
             </div>
             <nav className="flex items-center space-x-6 text-sm text-muted-foreground">
               <a href="#" className="hover:text-foreground transition-colors">About</a>
@@ -174,7 +174,7 @@ export default function Landing() {
             </nav>
           </div>
           <div className="mt-8 pt-8 border-t border-border text-center text-sm text-muted-foreground">
-            © 2025 AI Chatbot Platform. All rights reserved.
+            © 2025 AIChatOps Platform. All rights reserved.
           </div>
         </div>
       </footer>

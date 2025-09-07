@@ -47,10 +47,8 @@ router.get('/profile', async (req: Request, res: Response, next: NextFunction) =
   }
 });
 
-// Update user profile
 router.put('/profile', async (req: Request, res: Response, next: NextFunction) => {
   try {
-    // Validate request body
     const { error, value } = updateUserSchema.validate(req.body);
     if (error) {
       throw new ApiError(400, error.details[0].message);
@@ -89,7 +87,6 @@ router.put('/profile', async (req: Request, res: Response, next: NextFunction) =
   }
 });
 
-// Get user preferences
 router.get('/preferences', async (req: Request, res: Response, next: NextFunction) => {
   try {
     const response: Types.GetPreferencesResponse = await userServiceMethods.getPreferences({
@@ -123,7 +120,6 @@ router.get('/preferences', async (req: Request, res: Response, next: NextFunctio
   }
 });
 
-// Update user preferences
 router.put('/preferences', async (req: Request, res: Response, next: NextFunction) => {
   try {
     const response: Types.UpdatePreferencesResponse = await userServiceMethods.updatePreferences({
@@ -169,7 +165,6 @@ router.put('/preferences', async (req: Request, res: Response, next: NextFunctio
   }
 });
 
-// Delete user account
 router.delete('/account', async (req: Request, res: Response, next: NextFunction) => {
   try {
     await userServiceMethods.deleteUser({

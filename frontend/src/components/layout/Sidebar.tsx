@@ -2,9 +2,8 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Home, User, Settings, CreditCard, LogOut, MessageCircle, Moon, Sun } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useAuth } from '@/contexts/AuthContext';
 import { cn } from '@/lib/utils';
-
+import { useUser, useAIPreferences, useTheme, useLogout } from "../../store/index"
 interface SidebarProps {
   className?: string;
   isCollapsed?: boolean;
@@ -12,7 +11,11 @@ interface SidebarProps {
 }
 
 export function Sidebar({ className, isCollapsed = false, onToggleTheme }: SidebarProps) {
-  const { user, logout, preferences } = useAuth();
+  const user = useUser()
+  const aiPreferences = useAIPreferences()
+  const theme = useTheme()
+  const logout = useLogout()
+  console.log(user, aiPreferences, theme)
 
   const navigation = [
     { name: 'Dashboard', href: '/dashboard', icon: Home },
@@ -23,21 +26,20 @@ export function Sidebar({ className, isCollapsed = false, onToggleTheme }: Sideb
   ];
 
   return (
+
     <div className={cn(
       "flex h-full flex-col bg-sidebar border-r border-sidebar-border transition-all duration-300",
       isCollapsed ? "w-16" : "w-64",
       className
     )}>
-      {/* Logo */}
       <div className="flex h-16 items-center justify-center border-b border-sidebar-border px-4">
         {!isCollapsed ? (
-          <h1 className="text-xl font-bold gradient-text">AI Chatbot</h1>
+          <h1 className="text-xl font-bold gradient-text">AIChatOps</h1>
         ) : (
           <MessageCircle className="h-8 w-8 text-sidebar-primary" />
         )}
       </div>
 
-      {/* User Info */}
       {user && !isCollapsed && (
         <div className="border-b border-sidebar-border p-4">
           <div className="flex items-center space-x-3">
@@ -56,7 +58,6 @@ export function Sidebar({ className, isCollapsed = false, onToggleTheme }: Sideb
         </div>
       )}
 
-      {/* Navigation */}
       <nav className="flex-1 space-y-1 p-4">
         {navigation.map((item) => (
           <NavLink
@@ -78,7 +79,6 @@ export function Sidebar({ className, isCollapsed = false, onToggleTheme }: Sideb
         ))}
       </nav>
 
-      {/* Footer Actions */}
       <div className="border-t border-sidebar-border p-4 space-y-2">
         {/* Theme Toggle */}
         <Button
@@ -90,17 +90,16 @@ export function Sidebar({ className, isCollapsed = false, onToggleTheme }: Sideb
             isCollapsed && "justify-center"
           )}
         >
-          {preferences.theme === 'dark' ? (
+          {theme === 'dark' ? (
             <Sun className={cn("h-5 w-5", !isCollapsed && "mr-3")} />
           ) : (
             <Moon className={cn("h-5 w-5", !isCollapsed && "mr-3")} />
           )}
           {!isCollapsed && (
-            <span>{preferences.theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
+            <span>{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
           )}
         </Button>
 
-        {/* Logout */}
         <Button
           variant="ghost"
           size={isCollapsed ? "icon" : "default"}

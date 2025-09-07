@@ -1,6 +1,4 @@
-frontend-next/
-*.md
+
 .vscode/
 readme/
-ai-service/
-api-gateway/
+misc/

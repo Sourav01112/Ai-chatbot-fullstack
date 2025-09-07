@@ -1,2 +1,4 @@
-chat-service/
 proto/
+*.zip
+*.json
+misc/

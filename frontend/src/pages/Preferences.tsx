@@ -129,7 +129,7 @@ export default function Preferences() {
               <div>
                 <h1 className="text-2xl font-bold">Preferences</h1>
                 <p className="text-muted-foreground">
-                  Customize your AI chatbot experience
+                  Customize your AIChatOps experience
                 </p>
               </div>
             </div>

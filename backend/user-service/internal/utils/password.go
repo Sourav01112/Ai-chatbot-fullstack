@@ -74,7 +74,6 @@ func (p *PasswordManager) ValidatePassword(password string) error {
 }
 
 func ValidateEmail(email string) error {
-	// Basic email validation regex
 	emailRegex := regexp.MustCompile(`^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$`)
 
 	if len(email) > 254 {
@@ -97,7 +96,6 @@ func ValidateUsername(username string) error {
 		return fmt.Errorf("username must be less than 30 characters long")
 	}
 
-	// Username can contain letters, numbers, underscores, and hyphens
 	usernameRegex := regexp.MustCompile(`^[a-zA-Z0-9_-]+$`)
 	if !usernameRegex.MatchString(username) {
 		return fmt.Errorf("username can only contain letters, numbers, underscores, and hyphens")

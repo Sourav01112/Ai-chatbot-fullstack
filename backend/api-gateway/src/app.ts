@@ -11,9 +11,6 @@ import chatRoutes from './routes/chat';
 import userRoutes from './routes/user';
 import healthRoutes from './routes/health';
 
-
-
-
 export function createApp(): express.Application {
   const app = express();
 
@@ -40,18 +37,16 @@ export function createApp(): express.Application {
   }
 
   app.use(rateLimiter);
-  
 
   app.use('/health', healthRoutes);
   app.use('/api/auth', authRoutes);
   app.use('/api/chat', chatRoutes);
   app.use('/api/user', userRoutes);
 
-
   app.get('/', (req, res) => {
     res.json({
       success: true,
-      message: 'AI Chatbot API Gateway',
+      message: 'AIChatOps API Gateway',
       version: '1.0.0',
     });
   });

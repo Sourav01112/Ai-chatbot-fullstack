@@ -32,7 +32,6 @@ func NewJWTManager(cfg *config.Config) *JWTManager {
 }
 
 func (j *JWTManager) GenerateTokenPair(user *models.User) (*TokenPair, error) {
-	// Access token claims
 	accessClaims := &JWTClaims{
 		UserID:   user.ID,
 		Email:    user.Email,
@@ -47,14 +46,12 @@ func (j *JWTManager) GenerateTokenPair(user *models.User) (*TokenPair, error) {
 		},
 	}
 
-	// Create access token
 	accessToken := jwt.NewWithClaims(jwt.SigningMethodHS256, accessClaims)
 	accessTokenString, err := accessToken.SignedString([]byte(j.config.JWTSecret))
 	if err != nil {
 		return nil, fmt.Errorf("failed to sign access token: %w", err)
 	}
 
-	// Refresh token claims
 	refreshClaims := &jwt.RegisteredClaims{
 		ExpiresAt: jwt.NewNumericDate(time.Now().Add(j.config.JWTRefreshExpiresIn)),
 		IssuedAt:  jwt.NewNumericDate(time.Now()),
@@ -63,7 +60,6 @@ func (j *JWTManager) GenerateTokenPair(user *models.User) (*TokenPair, error) {
 		Subject:   user.ID,
 	}
 
-	// Create refresh token
 	refreshToken := jwt.NewWithClaims(jwt.SigningMethodHS256, refreshClaims)
 	refreshTokenString, err := refreshToken.SignedString([]byte(j.config.JWTSecret))
 	if err != nil {
@@ -122,6 +118,5 @@ func (j *JWTManager) RefreshToken(refreshTokenString string) (*TokenPair, error)
 		return nil, fmt.Errorf("invalid refresh token claims")
 	}
 
-	// Return error indicating this needs to be handled at service layer
 	return nil, fmt.Errorf("refresh token implementation requires user lookup")
 }

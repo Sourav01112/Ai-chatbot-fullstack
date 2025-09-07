@@ -19,8 +19,10 @@ declare global {
   }
 }
 
+
+
 export const authMiddleware = async (
-  req: Request,
+  req: Request, 
   res: Response,
   next: NextFunction
 ): Promise<void> => {

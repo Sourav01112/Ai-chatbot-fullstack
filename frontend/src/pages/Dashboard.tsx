@@ -4,7 +4,9 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Sidebar } from '@/components/layout/Sidebar';
 import { MobileNav } from '@/components/layout/MobileNav';
-import { useAuth } from '@/contexts/AuthContext';
+import {useAIPreferences, useUser} from "../store/index"
+
+// import { useAuth } from '@/contexts/AuthContext';
 import { 
   MessageCircle, 
   User, 
@@ -19,13 +21,15 @@ import {
 } from 'lucide-react';
 
 export default function Dashboard() {
-  const { user, preferences, updatePreferences } = useAuth();
+  const user = useUser()
+  const aiPreferences = useAIPreferences()
+  const [preferences, setPreferences] = useState({theme:"light", ai_preferences:"", preferred_models:""})
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleToggleTheme = async () => {
     const newTheme = preferences.theme === 'light' ? 'dark' : 'light';
-    await updatePreferences({ theme: newTheme });
+    // await updatePreferences({ theme: newTheme });
   };
 
   const quickActions = [
@@ -68,7 +72,7 @@ export default function Dashboard() {
           <div className="fixed inset-0 bg-background/80 backdrop-blur" onClick={() => setMobileMenuOpen(false)} />
           <div className="fixed left-0 top-0 h-full w-64 bg-sidebar border-r border-sidebar-border">
             <div className="flex items-center justify-between p-4 border-b border-sidebar-border">
-              <span className="text-lg font-bold gradient-text">AI Chatbot</span>
+              <span className="text-lg font-bold gradient-text">AIChatOps</span>
               <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(false)}>
                 <X className="h-5 w-5" />
               </Button>
@@ -102,7 +106,7 @@ export default function Dashboard() {
               </Button>
               <div>
                 <h1 className="text-2xl font-bold">
-                  Welcome back, {user?.first_name}! 
+                  Welcome back, {user?.first_name!}
                 </h1>
                 <p className="text-muted-foreground">
                   Ready to continue your AI conversations?
@@ -244,7 +248,7 @@ export default function Dashboard() {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-sm font-medium text-muted-foreground">AI Model</p>
-                      <p className="text-lg font-bold">{preferences.ai_preferences.preferred_models[0] || 'GPT-4'}</p>
+                      <p className="text-lg font-bold">{aiPreferences?.preferred_models}</p>
                     </div>
                     <Bot className="h-8 w-8 text-muted-foreground" />
                   </div>

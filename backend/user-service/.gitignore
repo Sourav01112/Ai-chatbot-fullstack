@@ -1,10 +1,6 @@
 cmd/
 readme/
-proto/
-scripts/
-internal/grpc/
-internal/repository/
-internal/service/
+
 
 
 # Binaries for programs and plugins

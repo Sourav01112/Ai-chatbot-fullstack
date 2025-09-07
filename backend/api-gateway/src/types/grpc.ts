@@ -165,3 +165,202 @@ export interface LogoutRequest {
 export interface DeleteUserRequest {
   userId: string;
 }
+
+
+
+
+
+
+// ================================= CHAT types
+
+
+
+// Chat Service Types
+
+// Common interfaces
+export interface Session {
+  id: string;
+  userId: string;
+  title: string;
+  status: string;
+  settings?: SessionSettings;
+  createdAt?: {
+    seconds: number;
+    nanos: number;
+  };
+  updatedAt?: {
+    seconds: number;
+    nanos: number;
+  };
+  lastActivity?: {
+    seconds: number;
+    nanos: number;
+  };
+}
+
+export interface SessionSettings {
+  aiPersona: string;
+  temperature: number;
+  maxTokens: number;
+  enableRag: boolean;
+  documentSources: string[];
+  systemPrompt: string;
+}
+
+export interface Message {
+  id: string;
+  sessionId: string;
+  userId: string;
+  content: string;
+  type: string;
+  metadata?: MessageMetadata;
+  createdAt?: {
+    seconds: number;
+    nanos: number;
+  };
+  parentMessageId?: string;
+  orderIndex: number;
+}
+
+export interface MessageMetadata {
+  sourceCitations: { [key: string]: string };
+  relevanceScore: number;
+  tags: string[];
+  modelUsed: string;
+  tokenCount: number;
+  responseTimeMs: number;
+  processingSteps: string[];
+}
+
+// Session Request/Response types
+export interface CreateSessionRequest {
+  userId: string;
+  title: string;
+  settings?: SessionSettings;
+}
+
+export interface CreateSessionResponse {
+  session?: Session;
+  success: boolean;
+  error?: string;
+}
+
+export interface GetSessionRequest {
+  sessionId: string;
+  userId: string;
+}
+
+export interface GetSessionResponse {
+  session?: Session;
+  success: boolean;
+  error?: string;
+}
+
+export interface GetUserSessionsRequest {
+  userId: string;
+  limit: number;
+  offset: number;
+}
+
+export interface GetUserSessionsResponse {
+  sessions: Session[];
+  totalCount: number;
+  hasMore: boolean;
+  success: boolean;
+  error?: string;
+}
+
+export interface UpdateSessionRequest {
+  sessionId: string;
+  userId: string;
+  title?: string;
+  status?: string;
+  settings?: SessionSettings;
+}
+
+export interface UpdateSessionResponse {
+  session?: Session;
+  success: boolean;
+  error?: string;
+}
+
+export interface DeleteSessionRequest {
+  sessionId: string;
+  userId: string;
+}
+
+// Message Request/Response types
+export interface SendMessageRequest {
+  sessionId: string;
+  userId: string;
+  content: string;
+  type: string;
+  metadata?: MessageMetadata;
+  parentMessageId?: string;
+}
+
+export interface SendMessageResponse {
+  message?: Message;
+  success: boolean;
+  error?: string;
+}
+
+export interface GetChatHistoryRequest {
+  sessionId: string;
+  userId: string;
+  limit: number;
+  offset: number;
+  fromDate?: {
+    seconds: number;
+    nanos: number;
+  };
+  toDate?: {
+    seconds: number;
+    nanos: number;
+  };
+}
+
+export interface GetChatHistoryResponse {
+  messages: Message[];
+  totalCount: number;
+  hasMore: boolean;
+  success: boolean;
+  error?: string;
+}
+
+export interface DeleteMessageRequest {
+  messageId: string;
+  userId: string;
+}
+
+export interface SearchMessagesRequest {
+  sessionId: string;
+  userId: string;
+  query: string;
+  limit: number;
+  offset: number;
+}
+
+export interface SearchMessagesResponse {
+  messages: Message[];
+  totalCount: number;
+  hasMore: boolean;
+  success: boolean;
+  error?: string;
+}
+
+export interface UpdateTypingStatusRequest {
+  sessionId: string;
+  userId: string;
+  isTyping: boolean;
+}
+
+export interface GetTypingUsersRequest {
+  sessionId: string;
+}
+
+export interface GetTypingUsersResponse {
+  userIds: string[];
+  success: boolean;
+  error?: string;
+}

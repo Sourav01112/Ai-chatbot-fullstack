@@ -23,16 +23,13 @@ type UserAnalytics struct {
 	UserID       string       `gorm:"type:uuid;index;not null" json:"user_id"`
 	ActivityType ActivityType `gorm:"type:varchar(50);not null" json:"activity_type"`
 
-	// Context Data
-	Metadata  JSON   `gorm:"type:jsonb" json:"metadata"`
-	IPAddress string `gorm:"size:45" json:"ip_address"`
-	UserAgent string `gorm:"size:500" json:"user_agent"`
-	SessionID string `gorm:"size:100" json:"session_id"`
+	Metadata  JSON    `gorm:"type:jsonb" json:"metadata"`
+	IPAddress *string `gorm:"size:45" json:"ip_address"`
+	UserAgent string  `gorm:"size:500" json:"user_agent"`
+	SessionID string  `gorm:"size:100" json:"session_id"`
 
-	// Timestamps
 	CreatedAt time.Time `gorm:"index" json:"created_at"`
 
-	// Foreign Key
 	User User `gorm:"foreignKey:UserID;references:ID" json:"-"`
 }
 
@@ -48,10 +45,8 @@ type UserStats struct {
 	TotalLoginDays     int              `json:"total_login_days"`
 }
 
-// JSON type for PostgreSQL JSONB
 type JSON map[string]interface{}
 
-// Scan implements the sql.Scanner interface
 func (j *JSON) Scan(value interface{}) error {
 	if value == nil {
 		*j = make(JSON)
@@ -60,7 +55,6 @@ func (j *JSON) Scan(value interface{}) error {
 	return json.Unmarshal(value.([]byte), j)
 }
 
-// Value implements the driver.Valuer interface
 func (j JSON) Value() (driver.Value, error) {
 	if j == nil {
 		return nil, nil

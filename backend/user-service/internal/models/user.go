@@ -32,26 +32,21 @@ type User struct {
 	LastName  string `gorm:"size:100" json:"last_name"`
 	AvatarURL string `gorm:"size:500" json:"avatar_url"`
 
-	// Authentication
 	PasswordHash  string `gorm:"not null" json:"-"`
 	EmailVerified bool   `gorm:"default:false" json:"email_verified"`
 
-	// Status and Role
 	Role   UserRole   `gorm:"type:varchar(20);default:'user'" json:"role"`
 	Status UserStatus `gorm:"type:varchar(20);default:'active'" json:"status"`
 
-	// Security
 	FailedLoginAttempts int        `gorm:"default:0" json:"-"`
 	LastFailedLoginAt   *time.Time `json:"-"`
 	LockedUntil         *time.Time `json:"-"`
 
-	// Timestamps
 	CreatedAt time.Time       `json:"created_at"`
 	UpdatedAt time.Time       `json:"updated_at"`
 	DeletedAt *gorm.DeletedAt `gorm:"index" json:"-"`
 	LastLogin *time.Time      `json:"last_login"`
 
-	// Relationships
 	Preferences *UserPreferences `gorm:"foreignKey:UserID;constraint:OnDelete:CASCADE" json:"preferences,omitempty"`
 	Analytics   []*UserAnalytics `gorm:"foreignKey:UserID;constraint:OnDelete:CASCADE" json:"analytics,omitempty"`
 }
